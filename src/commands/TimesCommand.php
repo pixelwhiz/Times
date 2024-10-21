@@ -60,7 +60,7 @@ class TimesCommand extends Command implements PluginOwned {
         }
 
         if (!isset($args[0])) {
-            $sender->sendMessage(TextFormat::GRAY . "Usage: " . TextFormat::RED . $this->getUsage());
+            $sender->sendMessage($this->getUsage());
             return false;
         }
 
@@ -71,23 +71,39 @@ class TimesCommand extends Command implements PluginOwned {
                     $sender->sendMessage("- ". $day);
                 }
                 break;
+            case "list":
+                $sender->sendMessage("Available Times: ");
+                foreach (DayRange::INCREMENT_TIME as $time => $value) {
+                    $sender->sendMessage("- ". $time);
+                }
+                break;
             case "set":
                 if (!isset($args[1]) || !isset($args[2])) {
                     $sender->sendMessage(TextFormat::RED . "Usage: /times set <time> <day>");
                     return false;
                 }
 
-                $timeFormat = $args[1];
-                if (!preg_match("/^([01][0-9]|2[0-3]):[0-5][0-9]$/", $timeFormat)) {
-                    throw new \InvalidArgumentException("Invalid time format. Please use HH:MM (24-hour format).");
-                }
-                
-                $dayName = $args[2];
-                $world = $sender->getWorld();
-                TimeManager::setTime($world, $timeFormat, $dayName);
-                $sender->sendMessage(TextFormat::GREEN . "Time set to $timeFormat on $dayName.");
-                return true;
+                $day = $args[2];
+                $time = $args[1];
 
+                if (!in_array($day, DayRange::DAYS)) {
+                    $sender->sendMessage(TextFormat::RED . "Invalid day. Use /times days to see the available days.");
+                    return false;
+                }
+
+                if (!array_key_exists($time, DayRange::INCREMENT_TIME)) {
+                    $sender->sendMessage(TextFormat::RED . "Invalid time. Use /times list to see the available times.");
+                    return false;
+                }
+
+                $world = $sender->getWorld();
+                $rangeOfDestinationDay = TimeManager::rangeOfDay($day)[0];
+
+                $timeValue = DayRange::INCREMENT_TIME[$time];
+
+                $world->setTime($rangeOfDestinationDay + $timeValue);
+
+                $sender->sendMessage(TextFormat::GREEN . "Time set to $time on $day.");
                 break;
             case "help":
                 $sender->sendMessage("Times Commands Help:");

@@ -33,9 +33,32 @@ use pocketmine\Server;
 
 class Loader extends PluginBase {
 
+    private const CONFIG_VERSION = 1.0;
+
     protected function onEnable(): void
     {
         Server::getInstance()->getPluginManager()->registerEvents(new EventHandler($this), $this);
         Server::getInstance()->getCommandMap()->register("times", new TimesCommand($this));
+        $this->checkConfig();
     }
+
+    public function checkConfig(): void {
+        $this->saveDefaultConfig();
+
+        $config = $this->getConfig();
+        if (!$config->exists("config-version") or $config->get("config-version") !== self::CONFIG_VERSION) {
+            $this->getLogger()->warning('An outdated config was provided, Please install new version at https://poggit.pmmp.io/ci/pixelwhiz/Times/');
+            $configFile = $this->getDataFolder() . 'config.yml';
+            $newConfigFile = $this->getDataFolder() . 'config.old.yml';
+
+            if (!rename($configFile, $newConfigFile)) {
+                $this->getLogger()->critical('An unknown error occurred while attempting to generate the new config');
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+                return;
+            }
+
+            $this->reloadConfig();
+        }
+    }
+
 }

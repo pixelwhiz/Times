@@ -1,5 +1,26 @@
 <?php
 
+/*
+ *   _______ _
+ *  |__   __(_)
+ *     | |   _ _ __ ___   ___  ___
+ *     | |  | | '_ ` _ \ / _ \/ __|
+ *     | |  | | | | | | |  __/\__ \
+ *     |_|  |_|_| |_| |_|\___||___/
+ *
+ * Copyright (C) 2024 pixelwhiz
+ *
+ * This software is distributed under "GNU General Public License v3.0".
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License v3.0
+ * along with this program. If not, see <https://opensource.org/licenses/GPL-3.0>.
+ */
+
 
 namespace pixelwhiz\times;
 
@@ -8,6 +29,28 @@ use pixelwhiz\times\math\Time;
 use pocketmine\world\World;
 
 class TimeManager {
+
+    public static function setTime(World $world, string $timeFormat, string $day) {
+        // Memastikan format waktu valid
+        if (!preg_match("/^([01][0-9]|2[0-3]):[0-5][0-9]$/", $timeFormat)) {
+            throw new \InvalidArgumentException("Invalid time format. Please use HH:MM (24-hour format).");
+        }
+
+        // Menghitung total menit dari HH:MM
+        list($hours, $minutes) = explode(':', $timeFormat);
+        $totalMinutes = ($hours * 60) + $minutes; // Total menit dari jam dan menit
+
+        // Mendapatkan rentang hari saat ini
+        $rangeOfCurrentDay = self::rangeOfDay(self::getCurrentDay($world));
+        $time = $world->getTime() - $rangeOfCurrentDay[0];
+
+        // Mendapatkan rentang hari tujuan
+        $rangeOfDestinationDay = self::rangeOfDay($day)[0];
+
+        // Mengatur waktu baru
+        $world->setTime($time + $rangeOfDestinationDay + $totalMinutes);
+    }
+
 
     public static function getCurrentDay(World $world): string {
         $dayRanges = [

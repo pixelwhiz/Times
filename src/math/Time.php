@@ -24,7 +24,6 @@
 
 namespace pixelwhiz\times\math;
 
-use function gmdate;
 
 class Time {
 

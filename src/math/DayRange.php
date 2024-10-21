@@ -27,6 +27,7 @@ namespace pixelwhiz\times\math;
 class DayRange {
 
     public const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    public const TIMES = ["Sunrise", "Day", "Noon", "Sunset", "Night", "Midnight"];
     public const INCREMENT_TIME = [
         "Sunrise" => 5000,
         "Day" => 7000,
@@ -35,6 +36,16 @@ class DayRange {
         "Night" => 19000,
         "Midnight" => 23000,
     ];
+
+    public const SUNDAY_INCREMENT_TIME = [
+        "Sunrise" => 5000,
+        "Day" => 1000,
+        "Noon" => 6000,
+        "Sunset" => 12000,
+        "Night" => 13000,
+        "Midnight" => 17000,
+    ];
+
 
     public const SUNDAY = [0, 18000, 162000, 168000];
     public const MONDAY = [18000, 42000];

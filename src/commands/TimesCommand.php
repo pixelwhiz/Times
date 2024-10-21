@@ -73,7 +73,7 @@ class TimesCommand extends Command implements PluginOwned {
                 break;
             case "list":
                 $sender->sendMessage("Available Times: ");
-                foreach (DayRange::INCREMENT_TIME as $time => $value) {
+                foreach (DayRange::TIMES as $time) {
                     $sender->sendMessage("- ". $time);
                 }
                 break;
@@ -97,9 +97,19 @@ class TimesCommand extends Command implements PluginOwned {
                 }
 
                 $world = $sender->getWorld();
-                $rangeOfDestinationDay = TimeManager::rangeOfDay($day)[0];
 
                 $timeValue = DayRange::INCREMENT_TIME[$time];
+
+                if ($day === DayRange::DAYS[0]) {
+                    if ($time === DayRange::TIMES[0]) {
+                        $rangeOfDestinationDay = TimeManager::rangeOfDay($day)[2];
+                    } else {
+                        $rangeOfDestinationDay = TimeManager::rangeOfDay($day)[0];
+                        $timeValue = DayRange::SUNDAY_INCREMENT_TIME[$time];
+                    }
+                } else {
+                    $rangeOfDestinationDay = TimeManager::rangeOfDay($day)[0];
+                }
 
                 $newTime = ($rangeOfDestinationDay + $timeValue);
                 $world->setTime($newTime);

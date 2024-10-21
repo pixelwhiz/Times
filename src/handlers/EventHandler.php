@@ -2,31 +2,30 @@
 
 namespace pixelwhiz\times\handlers;
 
-use pixelwhiz\times\TimeManager;
-use pocketmine\event\entity\EntityTeleportEvent;
+use pixelwhiz\times\Loader;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\Clock;
 
 class EventHandler implements Listener {
 
+    public array $useClock = [];
+
+    public function __construct(Loader $plugin) {
+        $this->plugin = $plugin;
+    }
+
     public function onHeld(PlayerItemUseEvent $event) {
         $player = $event->getPlayer();
         $item = $event->getItem();
         if ($item instanceof Clock) {
-            $day = TimeManager::getCurrentDay($player->getWorld());
-            $time = TimeManager::getCurrentTime($player->getWorld());
-            $player->sendMessage("Time: {$day}, {$time}");
-        }
-    }
-
-    public function onChange(EntityTeleportEvent $event) {
-        $from = $event->getFrom()->getWorld()->getFolderName();
-        $to = $event->getTo()->getWorld()->getFolderName();
-        $toWorld = $event->getTo()->getWorld();
-        if ($from !== $to) {
-
+            if (!isset($this->useClock[$player->getName()])) {
+                $this->task = $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($player), 20);
+                $this->useClock[$player->getName()] = true;
+            } else {
+                $this->task->cancel();
+                unset($this->useClock[$player->getName()]);
+            }
         }
     }
 

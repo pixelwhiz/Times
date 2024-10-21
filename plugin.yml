@@ -4,4 +4,14 @@ version: 0.0.1
 main: pixelwhiz\times\Loader
 api: 5.19.0
 src-namespace-prefix: pixelwhiz\times
+author: pixelwhiz
+commands:
+  times:
+    description: Set the world day and time
+    usage: /times help
+    permission: times.cmd
+permissions:
+  times.cmd:
+    description: Allows users to set the world day and time
+    default: op
 ...

@@ -73,25 +73,18 @@ class TimeManager {
             throw new \InvalidArgumentException("Invalid day: $day");
         }
 
-        switch ($index) {
-            case 0:
-                return DayRange::SUNDAY;
-            case 1:
-                return DayRange::MONDAY;
-            case 2:
-                return DayRange::TUESDAY;
-            case 3:
-                return DayRange::WEDNESDAY;
-            case 4:
-                return DayRange::THURSDAY;
-            case 5:
-                return DayRange::FRIDAY;
-            case 6:
-                return DayRange::SATURDAY;
-            default:
-                throw new \OutOfBoundsException("Invalid index: $index");
-        }
+        return match ($index) {
+            0 => DayRange::SUNDAY,
+            1 => DayRange::MONDAY,
+            2 => DayRange::TUESDAY,
+            3 => DayRange::WEDNESDAY,
+            4 => DayRange::THURSDAY,
+            5 => DayRange::FRIDAY,
+            6 => DayRange::SATURDAY,
+            default => throw new \OutOfBoundsException("Invalid index: $index"),
+        };
     }
+
 
     /**
      * @param World $world

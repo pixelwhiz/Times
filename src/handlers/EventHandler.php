@@ -41,7 +41,7 @@ class EventHandler implements Listener {
         $player = $event->getPlayer();
         $item = $event->getItem();
         if ($item instanceof Clock) {
-            if (!isset($this->useClock[$player->getName()])) {
+            if (!isset($this->plugin->useClock[$player->getName()])) {
                 $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($this->plugin, $player), 20);
                 $this->plugin->useClock[$player->getName()] = true;
             }

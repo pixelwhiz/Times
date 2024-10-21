@@ -39,12 +39,14 @@ class TimeManager {
 
     public static function getCurrentTime(World $world): string {
         if (self::getCurrentDay($world) === DayRange::DAYS[0]) {
-            $worldTime = intval($world->getTime());
+            $worldTime = floatval($world->getTime());
             if ($worldTime >= DayRange::SUNDAY[2] and $worldTime < DayRange::SUNDAY[3]) {
                 $time = ($worldTime - DayRange::SUNDAY[2]) * 0.06;
+                $time = round($time); // Membulatkan waktu ke integer
                 return Time::format(gmdate("i:s", $time), $time);
-            } else if($worldTime >= DayRange::SUNDAY[0] and $worldTime < DayRange::SUNDAY[1]) {
+            } else if ($worldTime >= DayRange::SUNDAY[0] and $worldTime < DayRange::SUNDAY[1]) {
                 $time = ($worldTime * 0.06) + 360;
+                $time = round($time); // Membulatkan waktu ke integer
                 return Time::format(gmdate("i:s", $time), $time);
             }
         } else {

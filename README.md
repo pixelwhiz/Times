@@ -17,6 +17,10 @@ with parameters `(string $day, string $time);`
 | **/times list** | Showing all times.                                                                                                           | `times.cmd` |
 | **/times set** | Set the time and day on the world.                                                                                                                        | `times.cmd` |
 
+# Issues
+
+If you have any issues, please report them [here](https://github.com/pixelwhiz/Times/issues/new).
+
 # Preview
 
 ![Preview 1](./assets/preview1.png)

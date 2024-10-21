@@ -28,6 +28,13 @@ use function gmdate;
 
 class Time {
 
+
+    /**
+     * Format time to AM or PM
+     * @param string $gmdate
+     * @param float $time
+     * @return string
+     */
     public static function format(string $gmdate, float $time): string {
         if ($time >= 0 && $time < 720) {
             return "{$gmdate} AM";

@@ -30,6 +30,10 @@ use pocketmine\world\World;
 
 class TimeManager {
 
+    /**
+     * @param World $world
+     * @return string
+     */
     public static function getCurrentDay(World $world): string {
         $dayRanges = [
             DayRange::SUNDAY,
@@ -58,6 +62,11 @@ class TimeManager {
         return "Sunday";
     }
 
+
+    /**
+     * @param string $day
+     * @return array
+     */
     public static function rangeOfDay(string $day): array {
         $index = array_search($day, DayRange::DAYS);
         if ($index === false) {
@@ -84,6 +93,10 @@ class TimeManager {
         }
     }
 
+    /**
+     * @param World $world
+     * @return string
+     */
     public static function getCurrentTime(World $world): string {
         if (self::getCurrentDay($world) === DayRange::DAYS[0]) {
             $worldTime = floatval($world->getTime());

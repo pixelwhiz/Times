@@ -24,15 +24,19 @@
 
 namespace pixelwhiz\times\handlers;
 
+use pixelwhiz\times\Loader;
 use pixelwhiz\times\TimeManager;
+use pocketmine\item\Clock;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 
 class TaskHandler extends Task {
 
+    private Loader $plugin;
     private Player $player;
 
-    public function __construct(Player $player) {
+    public function __construct(Loader $plugin, Player $player) {
+        $this->plugin = $plugin;
         $this->player = $player;
     }
 
@@ -40,6 +44,12 @@ class TaskHandler extends Task {
     {
         $player = $this->player;
         if ($player->isOnline()) {
+
+            if (!$player->getInventory()->getItemInHand() instanceof Clock) {
+                unset($this->plugin->useClock[$player->getName()]);
+                $this->getHandler()->cancel();
+            }
+
             $day = TimeManager::getCurrentDay($player->getWorld());
             $time = TimeManager::getCurrentTime($player->getWorld());
             $player->sendTip("Time: {$day}, {$time}");

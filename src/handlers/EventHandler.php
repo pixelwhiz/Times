@@ -31,7 +31,6 @@ use pocketmine\item\Clock;
 use pixelwhiz\times\handlers\TaskHandler;
 
 class EventHandler implements Listener {
-    public array $useClock = [];
     private Loader $plugin;
 
     public function __construct(Loader $plugin) {
@@ -43,11 +42,8 @@ class EventHandler implements Listener {
         $item = $event->getItem();
         if ($item instanceof Clock) {
             if (!isset($this->useClock[$player->getName()])) {
-                $this->task = $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($player), 20);
-                $this->useClock[$player->getName()] = true;
-            } else {
-                $this->task->cancel();
-                unset($this->useClock[$player->getName()]);
+                $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($this->plugin, $player), 20);
+                $this->plugin->useClock[$player->getName()] = true;
             }
         }
     }

@@ -29,6 +29,7 @@ use pixelwhiz\times\math\Time;
 use pocketmine\world\World;
 
 class TimeManager {
+
     public static function getCurrentDay(World $world): string {
         $dayRanges = [
             DayRange::SUNDAY,

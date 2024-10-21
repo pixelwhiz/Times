@@ -35,6 +35,8 @@ class Loader extends PluginBase {
 
     private const CONFIG_VERSION = 1.0;
 
+    public array $useClock = [];
+
     protected function onEnable(): void
     {
         Server::getInstance()->getPluginManager()->registerEvents(new EventHandler($this), $this);

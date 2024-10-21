@@ -34,7 +34,7 @@ class Time {
         } elseif ($time >= 720 && $time < 1440) {
             return "{$gmdate} PM";
         } else {
-            throw new \InvalidArgumentException("Invalid time value: $time. Time must be between 0 and 1440.");
+            return "00:00 AM";
         }
     }
 

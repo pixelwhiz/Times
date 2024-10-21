@@ -4,6 +4,7 @@
 namespace pixelwhiz\times;
 
 use pixelwhiz\times\math\DayRange;
+use pixelwhiz\times\math\Time;
 use pocketmine\world\World;
 
 class TimeManager {
@@ -37,7 +38,32 @@ class TimeManager {
     }
 
     public static function getCurrentTime(World $world): string {
-        return $day = self::getCurrentDay($world);
+        if (self::getCurrentDay($world) === DayRange::DAYS[0]) {
+            $worldTime = $world->getTime();
+            if ($worldTime >= DayRange::SUNDAY[2] and $worldTime < DayRange::SUNDAY[3]) {
+                $time = (DayRange::SUNDAY[3] - $worldTime) * 0.06;
+                return Time::format(gmdate("i:s", $time), $time);
+            } else if($worldTime >= DayRange::SUNDAY[0] and $worldTime < DayRange::SUNDAY[1]) {
+                $time = ($worldTime * 0.06) + 360;
+                return Time::format(gmdate("i:s", $time), $time);
+            }
+        } else {
+            $worldTime = $world->getTime();
+            $currentDay = self::getCurrentDay($world);
+            $days = [
+                DayRange::MONDAY,
+                DayRange::TUESDAY,
+                DayRange::WEDNESDAY,
+                DayRange::THURSDAY,
+                DayRange::FRIDAY,
+                DayRange::SATURDAY,
+            ];
+
+            foreach ($days as $day) {
+                $time = ($day[1] - $worldTime) * 0.05;
+                return Time::format(gmdate("i:s", $time), $time);
+            }
+        }
     }
 
 }

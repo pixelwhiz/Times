@@ -7,6 +7,12 @@ class DayRange {
     public const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     public const SUNDAY = [0, 18000, 162000, 168000];
+
+
+
+    /**
+     * @method static DAY [min_ticks, max_ticks]
+     */
     public const MONDAY = [18000, 42000];
     public const TUESDAY = [42000, 66000];
     public const WEDNESDAY = [66000, 90000];

@@ -9,7 +9,6 @@ class DayRange {
     public const SUNDAY = [0, 18000, 162000, 168000];
 
 
-
     /**
      * @method static DAY [min_ticks, max_ticks]
      */

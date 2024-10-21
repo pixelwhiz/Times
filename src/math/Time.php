@@ -6,7 +6,7 @@ use function gmdate;
 
 class Time {
 
-    public static function format(string $gmdate, int $time): string {
+    public static function format(string $gmdate, float $time): string {
         if ($time >= 0 && $time < 720) {
             return "{$gmdate} AM";
         } elseif ($time >= 720 && $time < 1440) {

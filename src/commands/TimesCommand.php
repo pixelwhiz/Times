@@ -86,13 +86,13 @@ class TimesCommand extends Command implements PluginOwned {
                 $day = $args[2];
                 $time = $args[1];
 
-                if (!in_array($day, DayRange::DAYS)) {
-                    $sender->sendMessage(TextFormat::RED . "Invalid day. Use /times days to see the available days.");
+                if (!array_key_exists($time, DayRange::INCREMENT_TIME)) {
+                    $sender->sendMessage(TextFormat::RED . "Invalid time. Use /times list to see the available times.");
                     return false;
                 }
 
-                if (!array_key_exists($time, DayRange::INCREMENT_TIME)) {
-                    $sender->sendMessage(TextFormat::RED . "Invalid time. Use /times list to see the available times.");
+                if (!in_array($day, DayRange::DAYS)) {
+                    $sender->sendMessage(TextFormat::RED . "Invalid day. Use /times days to see the available days.");
                     return false;
                 }
 
@@ -101,7 +101,8 @@ class TimesCommand extends Command implements PluginOwned {
 
                 $timeValue = DayRange::INCREMENT_TIME[$time];
 
-                $world->setTime($rangeOfDestinationDay + $timeValue);
+                $newTime = ($rangeOfDestinationDay + $timeValue);
+                $world->setTime($newTime);
 
                 $sender->sendMessage(TextFormat::GREEN . "Time set to $time on $day.");
                 break;
@@ -109,6 +110,7 @@ class TimesCommand extends Command implements PluginOwned {
                 $sender->sendMessage("Times Commands Help:");
                 $sender->sendMessage("- /times help (Showing all commands.)");
                 $sender->sendMessage("- /times days  (Showing all days.");
+                $sender->sendMessage("- /times list  (Showing all times.");
                 $sender->sendMessage("- /times set <time> <day> (Set the time and day on the world.)");
                 break;
             default:

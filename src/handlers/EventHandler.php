@@ -37,7 +37,7 @@ class EventHandler implements Listener {
         $this->plugin = $plugin;
     }
 
-    public function onHeld(PlayerItemUseEvent $event) {
+    public function onUse(PlayerItemUseEvent $event) {
         $player = $event->getPlayer();
         $item = $event->getItem();
         if ($item instanceof Clock) {

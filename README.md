@@ -10,12 +10,12 @@ with parameters `(string $day, string $time);`
 
 # Command & Permission
 
-| Command        | Description                                                                                                                  | Permission  |
-|----------------|------------------------------------------------------------------------------------------------------------------------------|-------------|
-| **/times help** | Showing all commands.                                                                                                        | `times.cmd` |
-| **/times days** | Showing all days.                                                                                                            | `times.cmd` |
-| **/times list** | Showing all times.                                                                                                           | `times.cmd` |
-| **/times set** | Set the time and day on the world.                                                                                                                        | `times.cmd` |
+| Command                     | Description                                                                                                                  | Permission  |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|-------------|
+| **/times help**             | Showing all commands.                                                                                                        | `times.cmd` |
+| **/times days**             | Showing all days.                                                                                                            | `times.cmd` |
+| **/times list**             | Showing all times.                                                                                                           | `times.cmd` |
+| **/times set [time] [day]** | Set the time and day on the world.                                                                                                                        | `times.cmd` |
 
 # Issues
 

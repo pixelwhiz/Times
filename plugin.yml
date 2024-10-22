@@ -2,7 +2,7 @@
 name: Times
 version: 1.0
 main: pixelwhiz\times\Loader
-api: 5.19.0
+api: 5.0.0
 src-namespace-prefix: pixelwhiz\times
 author: pixelwhiz
 website: https://github.com/pixelwhiz/Times.git

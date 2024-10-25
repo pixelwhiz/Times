@@ -1,7 +1,7 @@
 # Description
 [![](https://poggit.pmmp.io/shield.state/Times)](https://poggit.pmmp.io/p/Times)
 
-**Times** plugin that can display the clock on your world minecraft server such as /time query `2000` to `Sunday, 08:00 AM`
+**Times** plugin that can display the clock on minecraft server world such as /time query `2000` to `Sunday, 08:00 AM`
 
 ## Steps To Use
 1. **Add clock**: Use `/gamemode c` and take Clock item to Inventory.

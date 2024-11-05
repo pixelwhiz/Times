@@ -21,7 +21,6 @@
  * along with this program. If not, see <https://opensource.org/licenses/GPL-3.0>.
  */
 
-
 namespace pixelwhiz\times\handlers;
 
 use pixelwhiz\times\Loader;

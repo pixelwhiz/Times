@@ -23,6 +23,6 @@ If you have any issues, please report them [here](https://github.com/pixelwhiz/T
 
 # Preview
 
-![Preview 1](./assets/preview1.png)
-![Preview 2](./assets/preview2.png)
-![Preview 3](./assets/preview3.png)
+![Preview 1](./assets/prev1.png)
+![Preview 2](./assets/prev2.png)
+![Preview 3](./assets/prev3.png)

@@ -1,5 +1,7 @@
 # Description
 [![](https://poggit.pmmp.io/shield.state/Times)](https://poggit.pmmp.io/p/Times)
+[![](https://poggit.pmmp.io/shield.dl/Times)](https://poggit.pmmp.io/p/Times)
+[![](https://poggit.pmmp.io/shield.api/Times)](https://poggit.pmmp.io/p/Times)
 
 **Times** plugin that can display the clock on minecraft server world such as /time query `2000` to `Sunday, 08:00 AM`
 

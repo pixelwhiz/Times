@@ -25,6 +25,6 @@ If you have any issues, please report them [here](https://github.com/pixelwhiz/T
 
 # Preview
 
-![Preview 1](./assets/prev1.png)
-![Preview 2](./assets/prev2.png)
-![Preview 3](./assets/prev3.png)
+![Preview 1](https://github.com/pixelwhiz/Times/blob/master/assets/prev1.png)
+![Preview 2](https://github.com/pixelwhiz/Times/blob/master/assets/prev2.png)
+![Preview 3](https://github.com/pixelwhiz/Times/blob/master/assets/prev3.png)

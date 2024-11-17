@@ -44,7 +44,9 @@ class TaskHandler extends Task {
         $player = $this->player;
         if ($player->isOnline()) {
 
-            if (!$player->getInventory()->getItemInHand() instanceof Clock) {
+            if ($this->plugin->getConfig()->get("auto-display-when-join") === "false" and
+                !$player->getInventory()->getItemInHand() instanceof Clock
+            ) {
                 unset($this->plugin->useClock[$player->getName()]);
                 $this->getHandler()->cancel();
             }

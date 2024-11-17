@@ -33,7 +33,7 @@ use pocketmine\Server;
 
 class Loader extends PluginBase {
 
-    private const CONFIG_VERSION = 1.0;
+    private const CONFIG_VERSION = 2.0;
 
     public array $useClock = [];
 
@@ -48,7 +48,7 @@ class Loader extends PluginBase {
         $this->saveDefaultConfig();
 
         $config = $this->getConfig();
-        if (!$config->exists("config-version") or $config->get("config-version") !== self::CONFIG_VERSION) {
+        if (!$config->exists("config-version") and $config->get("config-version") !== self::CONFIG_VERSION) {
             $this->getLogger()->warning('An outdated config was provided, Please install new version at https://poggit.pmmp.io/ci/pixelwhiz/Times/');
             $configFile = $this->getDataFolder() . 'config.yml';
             $newConfigFile = $this->getDataFolder() . 'config.old.yml';

@@ -24,7 +24,7 @@
 
 namespace pixelwhiz\times\math;
 
-class DayRange {
+final class DayRange {
 
     public const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     public const TIMES = ["Sunrise", "Day", "Noon", "Sunset", "Night", "Midnight"];

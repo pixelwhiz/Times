@@ -1,6 +1,6 @@
 ---
 name: Times
-version: 2.0
+version: 2.0.1
 main: pixelwhiz\times\Loader
 api: 5.0.0
 src-namespace-prefix: pixelwhiz\times

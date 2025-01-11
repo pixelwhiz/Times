@@ -55,10 +55,6 @@ class TimeManager {
             }
         }
 
-        if ($time >= 168000) {
-            $world->setTime(0);
-        }
-
         return "Sunday";
     }
 
@@ -84,7 +80,6 @@ class TimeManager {
             default => throw new \OutOfBoundsException("Invalid index: $index"),
         };
     }
-
 
     /**
      * @param World $world

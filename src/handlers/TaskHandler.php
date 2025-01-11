@@ -24,9 +24,9 @@
 namespace pixelwhiz\times\handlers;
 
 use pixelwhiz\times\Loader;
+use pixelwhiz\times\math\DayRange;
+use pixelwhiz\times\math\Time;
 use pixelwhiz\times\TimeManager;
-use pocketmine\item\Clock;
-use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
@@ -40,6 +40,12 @@ class TaskHandler extends Task {
     public function onRun(): void
     {
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+            $world = $player->getWorld();
+            $time = $world->getTime();
+            if ($time >= 168000) {
+                $world->setTime(0);
+            }
+            
             if (isset($this->plugin->useClock[$player->getName()])) {
                 $player = Server::getInstance()->getPlayerExact($player->getName());
                 $day = TimeManager::getCurrentDay($player->getWorld());

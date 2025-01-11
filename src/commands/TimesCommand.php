@@ -119,8 +119,8 @@ class TimesCommand extends Command implements PluginOwned {
             case "help":
                 $sender->sendMessage("Times Commands Help:");
                 $sender->sendMessage("- /times help (Showing all commands.)");
-                $sender->sendMessage("- /times days  (Showing all days.");
-                $sender->sendMessage("- /times list  (Showing all times.");
+                $sender->sendMessage("- /times days  (Showing all days.)");
+                $sender->sendMessage("- /times list  (Showing all times.)");
                 $sender->sendMessage("- /times set <time> <day> (Set the time and day on the world.)");
                 break;
             default:

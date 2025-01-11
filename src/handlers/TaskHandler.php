@@ -28,34 +28,34 @@ use pixelwhiz\times\TimeManager;
 use pocketmine\item\Clock;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
+use pocketmine\Server;
 
 class TaskHandler extends Task {
 
     private Loader $plugin;
     private Player $player;
 
-    public function __construct(Loader $plugin, Player $player) {
+    public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
-        $this->player = $player;
     }
 
     public function onRun(): void
     {
-        $player = $this->player;
-        if ($player->isOnline()) {
+        foreach (Server::getInstance()->getOnlinePlayers() as $player) {
+            if ($player->isOnline()) {
+                if ($this->plugin->getConfig()->get("auto-display-when-join") === "false" and
+                    !$player->getInventory()->getItemInHand() instanceof Clock
+                ) {
+                    unset($this->plugin->useClock[$player->getName()]);
+                    $this->getHandler()->cancel();
+                }
 
-            if ($this->plugin->getConfig()->get("auto-display-when-join") === "false" and
-                !$player->getInventory()->getItemInHand() instanceof Clock
-            ) {
-                unset($this->plugin->useClock[$player->getName()]);
+                $day = TimeManager::getCurrentDay($player->getWorld());
+                $time = TimeManager::getCurrentTime($player->getWorld());
+                $player->sendTip("Time: {$day}, {$time}");
+            } else {
                 $this->getHandler()->cancel();
             }
-
-            $day = TimeManager::getCurrentDay($player->getWorld());
-            $time = TimeManager::getCurrentTime($player->getWorld());
-            $player->sendTip("Time: {$day}, {$time}");
-        } else {
-            $this->getHandler()->cancel();
         }
     }
 

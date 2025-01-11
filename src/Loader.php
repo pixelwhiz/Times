@@ -28,6 +28,7 @@ namespace pixelwhiz\times;
 
 use pixelwhiz\times\commands\TimesCommand;
 use pixelwhiz\times\handlers\EventHandler;
+use pixelwhiz\times\handlers\TaskHandler;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 
@@ -41,6 +42,8 @@ class Loader extends PluginBase {
     {
         Server::getInstance()->getPluginManager()->registerEvents(new EventHandler($this), $this);
         Server::getInstance()->getCommandMap()->register("times", new TimesCommand($this));
+
+        $this->getScheduler()->scheduleRepeatingTask(new TaskHandler($this), 20);
         $this->checkConfig();
     }
 

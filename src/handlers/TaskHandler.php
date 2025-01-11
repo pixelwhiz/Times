@@ -33,8 +33,6 @@ use pocketmine\Server;
 class TaskHandler extends Task {
 
     private Loader $plugin;
-    private Player $player;
-
     public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
     }
@@ -42,19 +40,12 @@ class TaskHandler extends Task {
     public function onRun(): void
     {
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-            if ($player->isOnline()) {
-                if ($this->plugin->getConfig()->get("auto-display-when-join") === "false" and
-                    !$player->getInventory()->getItemInHand() instanceof Clock
-                ) {
-                    unset($this->plugin->useClock[$player->getName()]);
-                    $this->getHandler()->cancel();
-                }
-
+            if (isset($this->plugin->useClock[$player->getName()])) {
+                $player = Server::getInstance()->getPlayerExact($player->getName());
                 $day = TimeManager::getCurrentDay($player->getWorld());
                 $time = TimeManager::getCurrentTime($player->getWorld());
-                $player->sendTip("Time: {$day}, {$time}");
-            } else {
-                $this->getHandler()->cancel();
+                $message = str_replace(["{time}", "{day}"], [$time, $day], $this->plugin->getConfig()->get("format"));
+                $player->sendTip($message);
             }
         }
     }

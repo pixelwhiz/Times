@@ -2,7 +2,8 @@
 
 config-version: 2.0
 
-# Auto start the clock when player join
-# Message will be displayed in the tip
+# Format {time} example: 06:00 AM
+# Format {day} example: Sunday
+# Message will display in tip
 
-auto-display-when-join: true
+format: "Time: {day}, {time}"

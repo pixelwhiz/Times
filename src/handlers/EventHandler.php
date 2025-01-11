@@ -27,8 +27,10 @@ namespace pixelwhiz\times\handlers;
 use pixelwhiz\times\handlers\TaskHandler;
 use pixelwhiz\times\Loader;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\Clock;
 
 class EventHandler implements Listener {
@@ -38,25 +40,19 @@ class EventHandler implements Listener {
         $this->plugin = $plugin;
     }
 
-    public function onUse(PlayerItemUseEvent $event) {
+    public function onHeld(PlayerItemHeldEvent $event) {
         $player = $event->getPlayer();
         $item = $event->getItem();
         if ($item instanceof Clock) {
-            if (!isset($this->plugin->useClock[$player->getName()])) {
-                $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($this->plugin, $player), 20);
-                $this->plugin->useClock[$player->getName()] = true;
-            }
+            $this->plugin->useClock[$player->getName()] = true;
+        } else {
+            unset($this->plugin->useClock[$player->getName()]);
         }
     }
 
-    public function onJoin(PlayerJoinEvent $event) {
+    public function onQuit(PlayerQuitEvent $event) {
         $player = $event->getPlayer();
-        if ($this->plugin->getConfig()->get("auto-display-when-join") === true) {
-            if (!isset($this->plugin->useClock[$player->getName()])) {
-                $this->plugin->getScheduler()->scheduleRepeatingTask(new TaskHandler($this->plugin, $player), 20);
-                $this->plugin->useClock[$player->getName()] = true;
-            }
-        }
+        unset($this->plugin->useClock[$player->getName()]);
     }
 
 }

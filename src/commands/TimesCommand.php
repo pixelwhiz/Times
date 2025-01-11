@@ -79,7 +79,7 @@ class TimesCommand extends Command implements PluginOwned {
                 break;
             case "set":
                 if (!isset($args[1]) || !isset($args[2])) {
-                    $sender->sendMessage(TextFormat::RED . "Usage: /times set <time> <day>");
+                    $sender->sendMessage(TextFormat::RED . "Usage: /times set <time:string> <day:string>");
                     return false;
                 }
 

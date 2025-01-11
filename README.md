@@ -7,8 +7,8 @@
 
 ## Steps To Use
 1. **Add clock**: Use `/gamemode c` and take Clock item to Inventory.
-2. **Right Click**: Right-click Clock item from your hand inventory
-3. **Done**: The digital clock will be displayed in the Tip
+2. **Held clock in hand**: Held Clock item in your inventory
+3. **Done**: The time will be display on the tip
 
 # Command & Permission
 
